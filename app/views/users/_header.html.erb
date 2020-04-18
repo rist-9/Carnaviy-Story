@@ -1,25 +1,34 @@
 <div class="container">
     <div class="row">
-      <div class="col-md-3">
-        <nav>
-          <span>カーナビー・ストーリー</span>
-        </nav>
+      <div class="col-md-4 col-md-offset-2">
+          <h2>カーナビー・ストーリー</h2>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-3">
-          <ul class="nav navbar-nav navbar-right">
+      <div class="col-md-8 col-md-offset-2">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+          <script>
+            $(function(){
+              $("ul.nav li").click(function(){
+                $("ul.nav li.selected").removeClass("selected");
+                $(this).addClass("selected");
+              });
+            });
+          </script>
+          <ul class="nav pull-right nav-pills">
             <!--if文でサインインとアウト時の表示を変更-->
             <% if user_signed_in? %>
-            <li><%= link_to ' home', user_path(current_user), class: 'glyphicon glyphicon-home home' %></li>
-            <li><%= link_to ' users', users_path, class: 'glyphicon glyphicon-user users' %></li>
-            <li><%= link_to ' books', books_path, class: 'glyphicon glyphicon-book books' %></li>
-            <li><%= link_to ' logout', destroy_user_session_path, method: :delete, class: 'glyphicon glyphicon-log-out logout' %></li>
+            <li class="nav-item"><%= link_to ' HOME', user_path(current_user) %></li>
+            <li class="nav-item"><%= link_to ' USERS', users_path %></li>
+            <li class="nav-item"><%= link_to ' BLOGS', books_path %></li>
+            <li class="nav-item"><%= link_to ' YOUTUBE', 'https://www.youtube.com/' %></li>
+            <li class="nav-item"><%= link_to ' logout', destroy_user_session_path, method: :delete %></li>
             <% else %>
-            <li><%= link_to ' home', root_path, class: 'glyphicon glyphicon-home home' %></li>
-            <li><%= link_to ' about', home_about_path, class: 'glyphicon glyphicon-link about' %></li>
-            <li><%= link_to ' sign up', new_user_registration_path, class: 'glyphicon glyphicon-edit sign_up' %></li>
-            <li><%= link_to ' login', new_user_session_path, class: 'glyphicon glyphicon-log-in sign_in' %></li>
+            <li class="nav-item"><%= link_to ' HOMES', root_path %></li>
+            <li class="nav-item"><%= link_to ' ABOUT', home_about_path %></li>
+            <li class="nav-item"><%= link_to ' YOUTUBE', 'https://www.youtube.com/' %></li>
+            <li class="nav-item"><%= link_to ' SIGN UP', new_user_registration_path %></li>
+            <li class="nav-item"><%= link_to ' LOGIN', new_user_session_path %></li>
             <% end %>
           </ul>
       </div>
