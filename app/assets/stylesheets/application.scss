@@ -16,3 +16,24 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+.container {
+	width: auto;
+}
+
+h2 {
+	padding: 30px 0 30px 0;
+}
+
+.nav{
+	width: 100%;
+    border: 1px solid #bdbab1;
+}
+
+ul.nav li {
+  background-color: transparent;
+}
+ul.nav li.selected {
+  background-color: red;
+}
+
