@@ -25,15 +25,21 @@ h2 {
 	padding: 30px 0 30px 0;
 }
 
+.current {
+	background-color: red;
+}
+
 .nav{
 	width: 100%;
     border: 1px solid #bdbab1;
 }
 
-ul.nav li {
-  background-color: transparent;
+.nav > li > a:hover, .nav > li > a:focus {
+	background-color: red;
 }
+
+
 ul.nav li.selected {
-  background-color: red;
+  background-color: black;
 }
 

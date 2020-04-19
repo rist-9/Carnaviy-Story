@@ -1,0 +1,64 @@
+<%= render "users/header" %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 col-md-offset-2">
+      <h2>新規登録</h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2 col-md-offset-2">ハンドルネーム</div>
+      <div class="col-md-2"><%= f.text_field :name, autofocus: true, class: "panel panel-default"  %></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2 col-md-offset-2">メールアドレス</div>
+      <div class="col-md-2"><%= f.email_field :email, autocomplete: "email", class: "panel panel-default"  %></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2 col-md-offset-2">電話番号(ハイフンなし)</div>
+      <div class="col-md-2"><%= f.telephone_field :telephone, class: "panel panel-default"  %></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2 col-md-offset-2">自己紹介文</div>
+      <div class="col-md-2"><%= f.text_field :introduction, class: "panel panel-default"  %></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2 col-md-offset-2">パスワード(6文字以上)</div>
+      <div class="col-md-2"><%= f.password_field :password, autocomplete: "new-password", class: "panel panel-default"  %></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2 col-md-offset-2">パスワード(確認用)</div>
+      <div class="col-md-2" ><%= f.password_field :password_confirmation, autocomplete: "new-password", class: "panel panel-default" %></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4 submit-btn">
+      <%= f.submit "新規登録", class: "btn btn-success btn-block " %>
+    </div>
+  </div>
+
+  <% end %>
+
+  <span class="row">
+    <h4 class="col-md-4 col-md-offset-2 subtitle">既に登録済みの方</h4>
+  </span>
+  <div class="row">
+    <div class="col-md-4 col-md-offset-2 link-box">
+      <%= link_to "こちら", new_user_session_path(resource) %>からログインしてください。
+    </div>
+  </div>
+</div>
+
