@@ -13,5 +13,6 @@ class User < ApplicationRecord
   validates :email, presence: true
   validates :password, presence: true, length: {in:6..20}, on: :create
   validates :telephone, presence: true
+  validates :introduction, presence: true
 
 end
