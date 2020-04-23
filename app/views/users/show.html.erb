@@ -1,2 +1,34 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<%= render "users/header" %>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-4 col-md-offset-2">
+			<h2>Books</h2>
+			<!--books一覧 -->
+			<table class="table table-hover table-inverse">
+				<thead>
+					<tr>
+						<th></th>
+						<th>Title</th>
+						<th>Opinion</th>
+						<th colspan="3"></th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<% @user.blogs.each do |blog| %>
+					<tr>
+						<td>
+							<%= link_to (blog.user) do %>
+							<%= attachment_image_tag(blog.user, :profile_image, :fill, 50, 50, fallback: "no-image-mini.jpg") %>
+							<% end %>
+						</td>
+						<td><%= link_to blog.title,blog, class: "blog_#{blog.id}" %></td>
+						<td><%= blog.introduction %></td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
+	</div>
+	</div>
+ </div>

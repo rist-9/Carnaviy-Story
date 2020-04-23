@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'favorites/create'
+  get 'favorites/destroy'
 	root 'home#top'
 
 	namespace :admin do

@@ -9,12 +9,13 @@
           <ul class="nav pull-right nav-pills">
             <!--if文でサインインとアウト時の表示を変更-->
             <% if user_signed_in? %>
-            <li class="nav-item <%= 'current' if current_page?(root_path) %>"><%= link_to ' HOME', user_path(current_user) %></li>
+            <li class="nav-item <%= 'current' if current_page?(root_path) %>"><%= link_to ' HOME', root_path %></li>
             <li class="nav-item <%= 'current' if current_page?(users_path) %>"><%= link_to ' USERS', users_path %></li>
             <li class="nav-item <%= 'current' if current_page?(blogs_path) %>"><%= link_to ' BLOGS', blogs_path %></li>
             <li class="nav-item"><%= link_to ' YOUTUBE', 'https://www.youtube.com/' %></li>
-            <li class="nav-item <%= 'current' if current_page?(blogs_path) %>"><%= link_to ' LOGOUT', destroy_user_session_path, method: :delete %></li>
-            <li class="nav-item pull-right <%= 'current' if current_page?(edit_user_path(current_user)) %>"><%= link_to ' MY PAGE', edit_user_path(current_user) %></li>
+            <li class="nav-item <%= 'current' if current_page?(edit_user_path(current_user)) %>"><%= link_to ' MY PAGE', edit_user_path(current_user) %></li>
+            <li class="nav-item <%= 'current' if current_page?(new_blog_path) %>"><%= link_to ' 投稿 ', new_blog_path %></li>
+            <li class="nav-item <%= 'current' if current_page?(destroy_user_session_path) %> pull-right"><%= link_to ' LOGOUT', destroy_user_session_path, method: :delete %></li>
             <% else %>
             <li class="nav-item <%= 'current' if current_page?(root_path) %>"><%= link_to ' HOME', root_path %></li>
             <li class="nav-item <%= 'current' if current_page?(home_about_path) %>"><%= link_to ' ABOUT', home_about_path %></li>

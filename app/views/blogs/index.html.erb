@@ -1,2 +1,52 @@
-<h1>Blogs#index</h1>
-<p>Find me in app/views/blogs/index.html.erb</p>
+<%= render "users/header" %>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-4 col-md-offset-2">
+			<h2>投稿一覧</h2>
+			<!--books一覧 -->
+			<table class="table table-hover table-inverse">
+				<thead>
+					<tr>
+						<th></th>
+						<th>Title</th>
+						<th>Opinion</th>
+						<th></th>
+						<th></th>
+						<th colspan="3"></th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<% @blogs.each do |blog| %>
+					<tr>
+						<td>
+							<%= link_to user_path(blog.user) do %>
+							<%= attachment_image_tag blog.user, :profile_image, :fill, 50, 50, format: 'jpeg', fallback: "no-image-mini.jpg" %>
+							<% end %>
+						</td>
+						<td><%= link_to blog.title, blog, class: "blog_#{blog.id}" %></td>
+						<td><%= blog.introduction %></td>
+						<td>
+							<% if blog.favorited_by?(current_user) %>
+							    <%= link_to blog_favorites_path(blog),class: 'glyphicon glyphicon-heart', method: :delete do %>
+							      <i class="fa fa-heart" aria-hidden="true" style="color: black;"></i>
+							      <%= blog.favorites.count %>
+							    <% end %>
+							<% else %>
+							    <%= link_to blog_favorites_path(blog),class: 'glyphicon glyphicon-heart', method: :post do %>
+							      <i class="fa fa-heart-o" aria-hidden="true"></i>
+							      <%= blog.favorites.count %>
+							 <% end %>
+						<% end %>
+						</td>
+						<td>
+						    <i class="comment-count">コメント数：<%= @blog.book_comments.count %></i>
+						</td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
