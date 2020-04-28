@@ -4,7 +4,12 @@ class BlogsController < ApplicationController
 
   def index
     @blog = Blog.new
-    @blogs = Blog.all.page(params[:page]).per(5)
+    @blogs = Blog.all
+    if params[:query].present?
+      genre_ids = Genre.where('name LIKE ?', "%#{params[:query]}%").pluck(:id)
+      @blogs = @blogs.where(genres_id: genre_ids)
+    end
+    @blogs = @blogs.page(params[:page]).per(5)
     @users = User.all
     @user = User.find(current_user.id)
   end
@@ -12,6 +17,7 @@ class BlogsController < ApplicationController
   def show
     @blog = Blog.find(params[:id])
     @blog_comment = BlogComment.new
+    @genre = Genre.find(params[:id])
   end
 
   def create

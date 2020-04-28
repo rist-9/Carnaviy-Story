@@ -4,6 +4,16 @@
           <h2>カーナビー・ストーリー</h2>
       </div>
 
+      <div class="col-md-4 col-md-offset-2">
+        <h3>メーカー検索</h3>
+
+        <%= form_with url: blogs_path, method: :get, local: true do |f| %>
+            <%= f.text_field :query %>
+            <%= f.submit :search %>
+        <% end %>
+      </div>
+
+
 
     <div class="row">
       <div class="col-md-8 col-md-offset-2">

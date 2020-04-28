@@ -51,30 +51,38 @@ ul.nav li.selected {
 .image1 {
 	height: 400px;
 	width: 900px;
-	object-fit: contain;
 	background-image: url(test1.jpg);
-	margin: auto;
+	background-position: center center;
+	background-size: cover;
 }
+
 .image2 {
 	height: 400px;
 	width: 900px;
-	object-fit: contain;
 	background-image: url(test2.jpg);
+	background-position: center center;
+	background-size: cover;
 }
 .image3 {
 	height: 400px;
 	width: 900px;
 	background-image: url(test3.jpg);
+	background-position: center center;
+	background-size: cover;
 }
 .image4 {
 	height: 400px;
 	width: 900px;
 	background-image: url(test4.jpg);
+	background-position: center center;
+	background-size: cover;
 }
 .image5 {
 	height: 400px;
 	width: 900px;
 	background-image: url(test5.jpg);
+	background-position: center center;
+	background-size: cover;
 }
 
 #container {

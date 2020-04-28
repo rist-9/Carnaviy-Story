@@ -26,8 +26,6 @@ Rails.application.routes.draw do
 			resource :favorites, only: [:create, :destroy]
 			resource :blog_comments, only: [:create]
 	end
-	resources :users, only: [:index, :show, :edit, :update, :search] do
-		get :search, on: :collection
-	end
+	resources :users, only: [:index, :show, :edit, :update, :search]
 	# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
