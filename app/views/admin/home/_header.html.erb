@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="row">
+      <div class="col-md-4 col-md-offset-2">
+          <h2>カーナビー・ストーリー</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+          <ul class="nav pull-right nav-pills">
+            <!--if文でサインインとアウト時の表示を変更-->
+            <% if admin_signed_in? %>
+            <li class="nav-item <%= 'current' if current_page?(admin_root_path) %>"><%= link_to ' ホーム ', admin_root_path %></li>
+            <li class="nav-item <%= 'current' if current_page?(admin_users_path) %>"><%= link_to ' 会員管理 ', admin_users_path %></li>
+            <li class="nav-item <%= 'current' if current_page?(admin_blogs_path) %>"><%= link_to ' ブログ管理' , admin_blogs_path %></li>
+            <li class="nav-item <%= 'current' if current_page?(admin_genres_path) %>"><%= link_to ' ジャンル管理 ', admin_genres_path %></li>
+            <li class="nav-item <%= 'current' if current_page?(destroy_admin_session_path) %> pull-right"><%= link_to ' ログアウト ', destroy_admin_session_path, method: :delete %></li>
+            <% else %>
+            <li class="nav-item <%= 'current' if current_page?(admin_root_path) %>"><%= link_to ' ホーム', admin_root_path %></li>
+            <li class="nav-item <%= 'current' if current_page?(new_admin_session_path) %>"><%= link_to ' ログイン', new_admin_session_path %></li>
+            <% end %>
+          </ul>
+      </div>
+    </div>
+</div>

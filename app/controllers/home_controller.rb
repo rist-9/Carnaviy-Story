@@ -1,5 +1,10 @@
 class HomeController < ApplicationController
   def top
+    if user_signed_in?
+      if User.find(current_user.id).status == false
+        sign_out_and_redirect(current_user)
+      end
+    end
   end
 
   def creare

@@ -1,0 +1,80 @@
+<%= render "admin/home/header" %>
+
+<div class="container">
+    <div class="row">
+      <div class="col-md-4 col-md-offset-2">
+
+		<%= form_for @user,url: admin_user_path(@user.id) do |f| %>
+		<%= render "devise/shared/error_messages", resource: @user %>
+
+		<div class="row">
+			<div class="col-md-5 col-md-offset-1">
+				<h3 class="admin-user-edit-title">会員編集画面</h3>
+			</div>
+		</div>
+
+		<div class="row admin-user-edit-row">
+			<div class="col-md-2 col-md-offset-1">
+				<p>会員ID</p>
+			</div>
+			<div class="col-md-1">
+				<p><%= @user.id %></p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-4 col-md-offset-1">
+				<p>ハンドルネーム</p>
+			</div>
+			<div class="col-md-1">
+				<%= f.text_field :name, class: "panel panel-default" %>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-4 col-md-offset-1">
+				<p>電話番号</p>
+			</div>
+			<div class="col-md-1">
+				<%= f.text_field :telephone, class: "panel panel-default" %>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-4 col-md-offset-1">
+				<p>メールアドレス</p>
+			</div>
+			<div class="col-md-1">
+				<%= f.text_field :email, class: "panel panel-default" %>
+			</div>
+		</div>
+		<div class="row"><p> </p></div>
+
+		<div class="row">
+	    	<div class="col-md-5 col-md-offset-1">プロフィール画像</div>
+	        <div class="col-md-2">
+	        	<%= attachment_image_tag @user, :profile_image, :fill, 200,200, id: "attachment-image" %>
+				<%= f.attachment_field :profile_image, direct: true, class: "edit-attachment",id: "click-attachment" %>
+			</div>
+	    </div>
+
+		<div class="row admin-user-edit-row">
+			<div class="col-md-4 col-md-offset-1">
+				<p>会員ステータス</p>
+			</div>
+			<div class="col-md-4">
+				<span><%= f.radio_button :status, true %>有効</span>
+				<span><%= f.radio_button :status, false %>退会済み</span>
+			</div>
+		</div>
+
+		<div class="row admin-user-edit-row">
+			<div class="col-md-2 col-md-offset-1">
+				<%= f.submit "変更を保存する", class: "btn btn-primary" %>
+			</div>
+		</div>
+
+		<% end %>
+		</div>
+	</div>
+</div>

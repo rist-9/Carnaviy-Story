@@ -1,0 +1,42 @@
+<%= render "admin/home/header" %>
+
+
+<div class="container">
+    <div class="row">
+      <div class="col-md-4 col-md-offset-2">
+			<h3>会員一覧画面</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<table class="table">
+						<tr>
+							<th>会員ID</th>
+							<th>氏名</th>
+							<th>メールアドレス</th>
+							<th>ステータス</th>
+						</tr>
+					<tbody class="table-box">
+						<% @users.each do |user| %>
+							<tr>
+								<td><%= user.id %></td>
+								<td>
+									<%= link_to user.name, admin_user_path(user.id) %>
+								</td>
+								<td><%= user.email %></td>
+								<td>
+									<%= user.status == true ? "有効" : "無効" %>
+								</td>
+							</tr>
+						<% end %>
+					</tbody>
+			</table>
+
+			<div class="paginate">
+      			<%= paginate @users %>
+    		</div>
+
+		</div>
+	</div>
+
+</div>

@@ -3,32 +3,89 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-4 col-md-offset-2">
-			<h2>Books</h2>
-			<!--books一覧 -->
+			<h2>マイページ</h2>
+
+			<h4 class="mypage-headline-4l">登録情報</h4>
+			<% if current_user == @user %>
+				<%= link_to "編集する", edit_user_path(current_user), class: 'btn btn-primary active' %>
+				<%= link_to "パスワードを変更する", edit_user_password_path, class: 'btn btn-primary active' %>
+			<% end %>
+			<table class="table table-bordered">
+				<tbody class="profile-list">
+					<tr>
+						<th class="profile-list-title active col-md-2">プロフィール画像</th>
+						<td class="col-md-7"><%= attachment_image_tag @user, :profile_image, :fill, 200,200, fallback: "no-image-mini.jpg", id: "attachment-image" %></td>
+					</tr>
+
+					<tr>
+						<th class="profile-list-title active col-md-2">氏名</th>
+						<td class="col-md-7"><%= "#{@user.name}" %></td>
+					</tr>
+
+					<tr>
+						<th class="profile-list-title active col-md-3">自己紹介</th>
+						<td class="col-md-7"><%= "#{@user.introduction}" %></td>
+					</tr>
+
+				<% if current_user == @user %>
+
+					<tr>
+						<th class="profile-list-title active col-md-3">メールアドレス</th>
+						<td class="col-md-7"><%= "#{@user.email}" %></td>
+					</tr>
+
+					<tr>
+						<th class="profile-list-title active col-md-2">電話番号</th>
+						<td class="col-md-7"><%= "#{@user.telephone}" %></td>
+					</tr>
+				<% end %>
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
 			<table class="table table-hover table-inverse">
 				<thead>
 					<tr>
 						<th></th>
-						<th>Title</th>
-						<th>Opinion</th>
+						<th>タイトル</th>
+						<th>紹介文</th>
 						<th colspan="3"></th>
 					</tr>
 				</thead>
 
 				<tbody>
-					<% @user.blogs.each do |blog| %>
+					<% @blogs.each do |blog| %>
 					<tr>
-						<td>
+						<td class="col-md-1 col-md-offset-4">
 							<%= link_to (blog.user) do %>
 							<%= attachment_image_tag(blog.user, :profile_image, :fill, 50, 50, fallback: "no-image-mini.jpg") %>
 							<% end %>
 						</td>
-						<td><%= link_to blog.title,blog, class: "blog_#{blog.id}" %></td>
-						<td><%= blog.introduction %></td>
+						<td class="col-md-3 col-md-offset-4"><%= link_to blog.title,blog, class: "blog_#{blog.id}" %></td>
+						<td class="col-md-3 col-md-offset-4"><%= blog.introduction %></td>
+						<td class="col-md-1 col-md-offset-2">
+							<% if blog.favorited_by?(current_user) %>
+							    <%= link_to blog_favorites_path(blog),class: 'glyphicon glyphicon-heart', method: :delete do %>
+							      <i class="fa fa-heart" aria-hidden="true" style="color: black;"></i>
+							      <%= blog.favorites.count %>
+							    <% end %>
+							<% else %>
+							    <%= link_to blog_favorites_path(blog),class: 'glyphicon glyphicon-heart', method: :post do %>
+							      <i class="fa fa-heart-o" aria-hidden="true"></i>
+							      <%= blog.favorites.count %>
+							 <% end %>
+						<% end %>
+						</td>
+						<td>
+						    <i class="col-md-6 col-md-offset-3 comment-count">コメント数：<%= blog.blog_comments.count %></i>
+						</td>
 					</tr>
 					<% end %>
 				</tbody>
 			</table>
-	</div>
+		</div>
 	</div>
  </div>

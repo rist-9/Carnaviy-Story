@@ -1,0 +1,36 @@
+
+<%= render 'admin/home/header' %>
+
+<div class="container">
+    <div class="row">
+      <div class="col-md-4 col-md-offset-2">
+
+        <h3 class="title">ブログ詳細画面</h3>
+
+        <div class="row text">
+          <div class="col-md-2">ブログID</div>
+          <div class="col-md-10"><%= @blog.id %>
+
+        <div class="row text">
+          <div class="col-md-2">氏名</div>
+          <div class="col-md-10"><%= @user.name %></div>
+        </div>
+
+        <div class="row text">
+          <div class="col-md-2">タイトル</div>
+          <div class="col-md-1"><%= @blog.title %></div>
+        </div>
+
+        <div class="row text">
+          <div class="col-md-2">紹介文</div>
+          <div class="col-md-1"><%= @blog.introduction %></div>
+        </div>
+
+        <div class="row text">
+          <div class="col-md-2">画像</div>
+          <div class="col-md-1"><%= @blog.image %></div>
+        </div>
+
+      </div>
+  </div>
+<div>

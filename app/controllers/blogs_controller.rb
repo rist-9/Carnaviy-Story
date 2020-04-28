@@ -1,14 +1,17 @@
 class BlogsController < ApplicationController
+
+  before_action :authenticate_user! , only:[:edit, :show]
+
   def index
     @blog = Blog.new
-    @blogs = Blog.all
+    @blogs = Blog.all.page(params[:page]).per(5)
     @users = User.all
     @user = User.find(current_user.id)
   end
 
-  def def show
+  def show
     @blog = Blog.find(params[:id])
-    @user = @blog.user
+    @blog_comment = BlogComment.new
   end
 
   def create
@@ -16,9 +19,10 @@ class BlogsController < ApplicationController
     @blogs = Blog.all
     @blog.user_id = current_user.id
     if @blog.save
-      redirect_to blog_path(@blog)
+      redirect_to action: 'index'
       @user = current_user
-      render 'index'
+    else
+      render 'new'
     end
   end
 
@@ -38,12 +42,6 @@ class BlogsController < ApplicationController
 
   def new
     @blog = Blog.new
-    # if @blog.save
-    #   redirect_to blog_path(@blog)
-    # else
-    #   @user = current_user
-    #   render 'index'
-    # end
   end
 
   def destroy
@@ -54,6 +52,6 @@ class BlogsController < ApplicationController
 
   private
     def blog_params
-      params.require(:blog).permit(:title,:introduction,:image_id)
+      params.require(:blog).permit(:title,:introduction,:image,:genres_id)
     end
 end
