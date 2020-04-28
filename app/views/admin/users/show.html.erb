@@ -1,0 +1,49 @@
+
+<%= render 'admin/home/header' %>
+
+<div class="container">
+    <div class="row">
+      <div class="col-md-4 col-md-offset-2">
+
+        <h3 class="title">会員詳細画面</h3>
+
+        <div class="row text">
+          <div class="col-md-4">顧客ID</div>
+          <div class="col-md-4"><%= @user.id %>
+            <% if @user.status == true %>
+              <span class="status-label-true">有効会員</span>
+            <% else %>
+              <span class="status-label-false">無効会員</span>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="row text">
+          <div class="col-md-4">氏名</div>
+          <div class="col-md-2"><%= @user.name %></div>
+        </div>
+
+        <div class="row text">
+          <div class="col-md-4">電話番号</div>
+          <div class="col-md-1"><%= @user.telephone %></div>
+        </div>
+
+        <div class="row text">
+          <div class="col-md-4">メールアドレス</div>
+          <div class="col-md-1"><%= @user.email %></div>
+        </div>
+
+        <div class="row text">
+          <div class="col-md-4">プロフィール画像</div>
+          <div class="col-md-7"><%= attachment_image_tag @user, :profile_image, :fill, 200,200, fallback: "no-image-mini.jpg", id: "attachment-image" %>
+          </div>
+        </div>
+
+        <div class="row bottan-box">
+            <div class="col-md-2">
+            <%= link_to "編集する", edit_admin_user_path, class: 'btn btn-primary' %>
+          </div>
+        </div>
+      </div>
+  </div>
+<div>

@@ -1,2 +1,68 @@
-<h1>Blogs#show</h1>
-<p>Find me in app/views/blogs/show.html.erb</p>
+<%= render "users/header" %>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<h2>詳細ページ</h2>
+			<table class="table">
+				<tr>
+					<td class="col-md-1 col-md-offset-4">
+						<%= attachment_image_tag(@blog.user, :profile_image, :fill, 100, 100, fallback: "no-image-mini.jpg") %><br>
+					</td>
+
+					<td class="col-md-1 col-md-offset-3">
+					    <%= attachment_image_tag(@blog, :image, :fill, 200, 200, fallback: "no_image.jpg") %>
+					</td>
+
+					<td class="col-md-2 col-md-offset-4"><%= link_to @blog.title, blog_path(@blog) %></td>
+
+					<td class="col-md-3 col-md-offset-4"><%= @blog.introduction %></td>
+
+					<td>
+						<% if @blog.favorited_by?(current_user) %>
+						    <%= link_to blog_favorites_path(@blog),class: 'glyphicon glyphicon-heart', method: :delete do %>
+						      <i class="fa fa-heart " aria-hidden="true" style="color: black;"></i>
+						      <%= @blog.favorites.count %>
+						    <% end %>
+						<% else %>
+						    <%= link_to blog_favorites_path(@blog),class: 'glyphicon glyphicon-heart', method: :post do %>
+						      <i class="fa fa-heart-o" aria-hidden="true"></i>
+						      <%= @blog.favorites.count %>
+						    <% end %>
+						<% end %>
+					</td>
+					<% if current_user == @blog.user %>
+						<td class="col-md-1 col-md-offset-3"><%= link_to "編集",edit_blog_path(@blog), class: "btn-sm btn-success edit_blog_#{@blog.id}" %></td>
+						<td class="col-md-1 col-md-offset-2"><%= link_to "削除",@blog, method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger destroy_blog_#{@blog.id}" %></td>
+					<% end %>
+				</tr>
+			</table>
+			<div class="row">
+				<% @blog.blog_comments.each do |blog| %>
+                    <%= attachment_image_tag blog.user, :profile_image, :fill, 60, 60, fallback: "no-image-mini.jpg" %>
+                        <div class="comment-text">
+                            <div class="comment-author clearfix">
+                                <a href="#" class="link-author"><%= blog.user.name %></a>
+                                <span class="comment-meta">
+                                  <span class="comment-date"><%= blog.created_at.strftime('%Y/%m/%d') %></span>
+                                </span>
+                            </div>
+                            <div class="comment-entry"><%= blog.comment %></div>
+                        </div>
+                <% end %>
+				<!-- Add comment section -->
+			   	<div class="section-title-wrapper style-1 v1 mt-30" id="divAddComment">
+			   	    <h3 class="section-title left"><span>コメント</span></h3>
+			   	</div>
+			   	<%= form_for [@blog, @blog_comment] do |f| %>
+			   	    <div class="row">
+			   	        <div class="col-sm-12">
+			   	            <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
+			   	        </div>
+			   	    </div>
+			   	    <%= f.submit "送信する", class: "btn-sm btn-primary pull-right" %>
+			   	<% end %>
+			</div>
+		</div>
+	</div>
+</div>

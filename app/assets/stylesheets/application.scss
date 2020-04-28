@@ -17,8 +17,14 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+html {
+	width: auto;
+	background-color: #CCFFFF;
+}
+
 .container {
 	width: auto;
+	background-color: #CCFFFF;
 }
 
 h2 {
@@ -44,27 +50,30 @@ ul.nav li.selected {
 
 .image1 {
 	height: 400px;
-	width: 400px;
+	width: 900px;
+	object-fit: contain;
 	background-image: url(test1.jpg);
+	margin: auto;
 }
 .image2 {
 	height: 400px;
-	width: 400px;
+	width: 900px;
+	object-fit: contain;
 	background-image: url(test2.jpg);
 }
 .image3 {
 	height: 400px;
-	width: 400px;
+	width: 900px;
 	background-image: url(test3.jpg);
 }
 .image4 {
 	height: 400px;
-	width: 400px;
+	width: 900px;
 	background-image: url(test4.jpg);
 }
 .image5 {
 	height: 400px;
-	width: 400px;
+	width: 900px;
 	background-image: url(test5.jpg);
 }
 

@@ -2,15 +2,15 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-md-4 col-md-offset-2">
+		<div class="col-md-7 col-md-offset-2">
 			<h2>投稿一覧</h2>
 			<!--books一覧 -->
 			<table class="table table-hover table-inverse">
 				<thead>
 					<tr>
 						<th></th>
-						<th>Title</th>
-						<th>Opinion</th>
+						<th>タイトル</th>
+						<th>紹介文</th>
 						<th></th>
 						<th></th>
 						<th colspan="3"></th>
@@ -30,23 +30,26 @@
 						<td>
 							<% if blog.favorited_by?(current_user) %>
 							    <%= link_to blog_favorites_path(blog),class: 'glyphicon glyphicon-heart', method: :delete do %>
-							      <i class="fa fa-heart" aria-hidden="true" style="color: black;"></i>
-							      <%= blog.favorites.count %>
+							    	<i class="fa fa-heart" aria-hidden="true" style="color: black;"></i>
+							    	<%= blog.favorites.count %>
 							    <% end %>
 							<% else %>
 							    <%= link_to blog_favorites_path(blog),class: 'glyphicon glyphicon-heart', method: :post do %>
-							      <i class="fa fa-heart-o" aria-hidden="true"></i>
-							      <%= blog.favorites.count %>
-							 <% end %>
-						<% end %>
+							    	<i class="fa fa-heart-o" aria-hidden="true"></i>
+							    	<%= blog.favorites.count %>
+								<% end %>
+							<% end %>
 						</td>
 						<td>
-						    <i class="comment-count">コメント数：<%= @blog.book_comments.count %></i>
+						    <i class="comment-count">コメント数：<%= @blog.blog_comments.count %></i>
 						</td>
 					</tr>
 					<% end %>
 				</tbody>
 			</table>
+			<div class="paginate">
+    			<%= paginate @blogs %>
+    		</div>
 		</div>
 	</div>
 </div>
