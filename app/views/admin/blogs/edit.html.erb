@@ -1,0 +1,45 @@
+<%= render "admin/home/header" %>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-4 col-md-offset-2">
+		<h2>ブログ編集</h2>
+			<div class="row">
+				<div class="col-md-8 col-md-offset-1">
+					<%= form_for @blog,url: admin_blogs_path(@blog.id) do |f| %>
+
+						<!-- エラーメッセージ表示-->
+						<%= render "devise/shared/error_messages", resource: @blog %>
+						<!-- エラーメッセージ表示-->
+
+						<div class="row">
+							<div class="col-md-5 col-md-offset-1">ブログタイトル</div>
+							<div class="col-md-2"><%= f.text_field :title, class: "panel panel-default"  %></div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-5 col-md-offset-1">ブログ内容</div>
+							<div class="col-md-2"><%= f.text_area :introduction, class: "panel panel-default"  %></div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-4 col-md-offset-1">メーカー</div>
+							<div class="col-md-2"><%= f.collection_select :genres_id, Genre.all, :id, :name, class: "panel panel-default"  %></div>
+						</div>
+
+						<div class="row">
+					      <div class="col-md-5 col-md-offset-1">ブログ写真</div>
+					        <div class="col-md-2"><%= f.attachment_field :image, class: "blog_image" %>
+					        <%= attachment_image_tag(@blog, :image, :fill, 100, 100, fallback: "no_image.jpg") %></div>
+					    </div>
+
+					    <div class="row">
+							<%= f.submit class: "btn btn-primary col-md-6 col-md-offset-2" %>
+						</div>
+
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
