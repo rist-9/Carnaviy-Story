@@ -4,12 +4,12 @@ class BlogsController < ApplicationController
 
   def index
     @blog = Blog.new
-    @blogs = Blog.all
     if params[:query].present?
       genre_ids = Genre.where('name LIKE ?', "%#{params[:query]}%").pluck(:id)
-      @blogs = @blogs.where(genres_id: genre_ids)
+      @blogs = Blog.where(genre_id: genre_ids).page(params[:page]).per(5)
+    else
+      @blogs = Blog.all.page(params[:page]).per(5)
     end
-    @blogs = @blogs.page(params[:page]).per(5)
     @users = User.all
     @user = User.find(current_user.id)
   end
@@ -17,7 +17,7 @@ class BlogsController < ApplicationController
   def show
     @blog = Blog.find(params[:id])
     @blog_comment = BlogComment.new
-    @genre = Genre.find(params[:id])
+    @genre = @blog.genre
   end
 
   def create
@@ -25,7 +25,7 @@ class BlogsController < ApplicationController
     @blogs = Blog.all
     @blog.user_id = current_user.id
     if @blog.save
-      redirect_to action: 'index'
+      redirect_to blog_path(@blog)
       @user = current_user
     else
       render 'new'
@@ -58,6 +58,6 @@ class BlogsController < ApplicationController
 
   private
     def blog_params
-      params.require(:blog).permit(:title,:introduction,:image,:genres_id)
+      params.require(:blog).permit(:title,:introduction,:image,:genre_id)
     end
 end

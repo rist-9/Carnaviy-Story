@@ -3,6 +3,7 @@ class Blog < ApplicationRecord
 	belongs_to :user
 	has_many :blog_comments, dependent: :destroy
 	attachment :image
+	belongs_to :genre
 	has_many :favorites, dependent: :destroy
         def favorited_by?(user)
           Favorite.where(user_id: user.id).exists?

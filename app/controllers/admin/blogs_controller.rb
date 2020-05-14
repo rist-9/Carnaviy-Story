@@ -32,7 +32,7 @@ class Admin::BlogsController < ApplicationController
 
   private
     def blog_params
-      params.require(:blog).permit(:title,:introduction,:image,:genres_id)
+      params.require(:blog).permit(:title,:introduction,:image,:genre_id)
     end
 
 end
